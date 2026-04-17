@@ -1,0 +1,58 @@
+# ==========================================
+# 1. STM32CubeIDE / C / C++ (Bare-metal)
+# ==========================================
+# Ignoruj foldery kompilacji (zajmują dużo miejsca i generują się same)
+Debug/
+Release/
+build/
+
+# Ignoruj pliki binarne, mapy pamięci i pliki obiektowe
+*.o
+*.d
+*.elf
+*.bin
+*.hex
+*.map
+*.list
+*.su
+
+# (Opcjonalnie) Ignoruj lokalne ustawienia Eclipse, ale ZOSTAW pliki .project, .cproject i .ioc!
+.metadata/
+
+
+# ==========================================
+# 2. Python (Skrypt testowy)
+# ==========================================
+# Ignoruj skompilowane pliki "cache" Pythona
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignoruj foldery wirtualnych środowisk (jeśli kiedyś stworzysz)
+venv/
+env/
+.venv/
+
+
+# ==========================================
+# 3. Środowiska IDE (PyCharm / VS Code)
+# ==========================================
+# Konfiguracja PyCharma (historia lokalna, układ okien itp.)
+.idea/
+
+# Konfiguracja VS Code (jeśli kiedyś go użyjesz)
+.vscode/
+
+
+# ==========================================
+# 4. Pliki systemowe (Windows / macOS)
+# ==========================================
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
