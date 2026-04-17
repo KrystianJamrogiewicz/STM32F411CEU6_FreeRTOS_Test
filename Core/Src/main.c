@@ -22,6 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "app.h"
 
 /* USER CODE END Includes */
 
@@ -43,17 +44,17 @@
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart1;
 
-/* Definitions for Task_LED */
-osThreadId_t Task_LEDHandle;
-const osThreadAttr_t Task_LED_attributes = {
-  .name = "Task_LED",
+/* Definitions for LED */
+osThreadId_t LEDHandle;
+const osThreadAttr_t LED_attributes = {
+  .name = "LED",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for Task_UART */
-osThreadId_t Task_UARTHandle;
-const osThreadAttr_t Task_UART_attributes = {
-  .name = "Task_UART",
+/* Definitions for UART */
+osThreadId_t UARTHandle;
+const osThreadAttr_t UART_attributes = {
+  .name = "UART",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
@@ -65,8 +66,8 @@ const osThreadAttr_t Task_UART_attributes = {
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
-void StartDefaultTask(void *argument);
-void StartTask02(void *argument);
+void vLEDTask(void *argument);
+void vUARTTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -131,11 +132,11 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of Task_LED */
-  Task_LEDHandle = osThreadNew(StartDefaultTask, NULL, &Task_LED_attributes);
+  /* creation of LED */
+  LEDHandle = osThreadNew(vLEDTask, NULL, &LED_attributes);
 
-  /* creation of Task_UART */
-  Task_UARTHandle = osThreadNew(StartTask02, NULL, &Task_UART_attributes);
+  /* creation of UART */
+  UARTHandle = osThreadNew(vUARTTask, NULL, &UART_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -250,6 +251,7 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
@@ -269,42 +271,6 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
-
-/* USER CODE BEGIN Header_StartDefaultTask */
-/**
-  * @brief  Function implementing the Task_LED thread.
-  * @param  argument: Not used
-  * @retval None
-  */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument)
-{
-  /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END 5 */
-}
-
-/* USER CODE BEGIN Header_StartTask02 */
-/**
-* @brief Function implementing the Task_UART thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_StartTask02 */
-void StartTask02(void *argument)
-{
-  /* USER CODE BEGIN StartTask02 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END StartTask02 */
-}
 
 /**
   * @brief  Period elapsed callback in non blocking mode
