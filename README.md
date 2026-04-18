@@ -1,5 +1,6 @@
 # This project aims to provide hands-on experience with the FreeRTOS operating system. It implements periodic LED blinking and simultaneous data transmission via UART using two separate tasks.
 
+---
 ### Application Logic (app.c / app.h)
 
 All operational logic is contained within the app.c and app.h files. Location: STM32F411CEU6_FreeRTOS_Test/Core/Src and Inc.
@@ -7,7 +8,6 @@ The following functions have been implemented within `app.c` to handle the core 
 
 * **`vLEDTask`**: Responsible for the periodic toggling (blinking) of the onboard LED.
 * **`vUARTTask`**: Handles the periodic transmission of data strings via the UART interface.
-
 ---
 
 ### Setting up FreeRTOS in STM32CubeIDE
@@ -60,4 +60,3 @@ Whenever changes are made to the `.ioc` configuration and code is re-generated, 
 **Important:** These auto-generated empty functions must be manually removed from `main.c` after each code generation. Failure to do so will result in a `Multiple definition` linker error, as the compiler will detect two functions with the same name (one in `main.c` and one in `app.c`).
 
 ![The "Multiple Definition" Cleanup Rule](docs/img/step_5.png)
----
