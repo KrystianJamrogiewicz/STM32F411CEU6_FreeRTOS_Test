@@ -1,6 +1,5 @@
 # This project aims to provide hands-on experience with the FreeRTOS operating system. It implements periodic LED blinking and simultaneous data transmission via UART using two separate tasks.
 
----
 ### Application Logic (app.c / app.h)
 
 All operational logic is contained within the app.c and app.h files. Location: STM32F411CEU6_FreeRTOS_Test/Core/Src and Inc.
